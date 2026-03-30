@@ -1,0 +1,17 @@
+Version: 4
+
+Rules:
+  - Scope: "**"
+    Skills:
+      - skills/repo.md
+      - skills/demo-prompts.md
+
+  - Scope: "apps/next-legacy/**"
+    Skills:
+      - skills/next-pages-router.md
+    DependencyBoundary: apps/next-legacy
+
+  - Scope: "apps/next-modern/**"
+    Skills:
+      - skills/next-app-router.md
+    DependencyBoundary: apps/next-modern

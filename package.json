@@ -1,0 +1,13 @@
+{
+  "name": "skillex-demo",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "skillex:refresh": "skillex refresh",
+    "skillex:query:legacy": "skillex query --path 'apps/next-legacy/**' --format summary",
+    "skillex:query:modern": "skillex query --path 'apps/next-modern/**' --format summary"
+  },
+  "devDependencies": {
+    "@atheory-ai/skillex": "latest"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@demo/next-legacy-app",
+  "private": true,
+  "version": "1.0.0",
+  "dependencies": {
+    "@demo/component-library": "file:../../vendor/component-library-v1"
+  },
+  "demoFramework": {
+    "name": "next",
+    "version": "12.3.4",
+    "router": "pages"
+  }
+}
