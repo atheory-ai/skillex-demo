@@ -4,12 +4,12 @@ project:
   packageManager: pnpm
   thesis: "Resolve applicable skills by path, dependency, version, and audience."
 
-sources:
-  - id: root
-    path: skills
-    audience: all
-    priority: baseline
+baseline:
+  rootSkillsPath: skills
+  format: agentskills-directory
+  useWhenSkillexIsDisabled: true
 
+sources:
   - id: admin-app
     path: apps/admin/skills
     appliesTo:
@@ -123,5 +123,5 @@ resolution:
     - audience
     - topic
   fallback:
-    includeRootSkills: true
-    markRootSkillsAsBaseline: true
+    includeRootSkills: false
+    markRootSkillsAsBaseline: false

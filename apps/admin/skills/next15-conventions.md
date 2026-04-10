@@ -27,4 +27,4 @@ Use when editing `apps/admin/src/app`.
 
 ## See Also
 
-Root `skills/nextjs.md` for baseline guidance.
+Root `skills/nextjs/SKILL.md` for baseline guidance.

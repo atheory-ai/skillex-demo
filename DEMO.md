@@ -1,6 +1,9 @@
 # Demo Tasks
 
-Use these exercises to compare a flat root skill workflow with Skillex-style scoped resolution.
+Use these exercises to compare:
+
+- a root-only baseline that uses only `AGENTS.md` plus `skills/`
+- a Skillex-style workflow that ignores the root `skills/` corpus and resolves distributed app/package/vendor skills instead
 
 ## Task 1: Add A Promotional Banner To Admin
 
@@ -8,7 +11,7 @@ Goal: add a campaign notice to `apps/admin/src/app/dashboard/page.tsx`.
 
 Intended challenge: admin uses Next.js 15 and `@demo/design-system` v2 from `vendor/design-system-v2`.
 
-Likely failure without Skillex: the agent finds v3 slot guidance and writes `Banner.Content` in a v2 app, or follows storefront merchandising tone in an operational dashboard.
+Likely failure without Skillex: the agent reconstructs the answer from broad root guidance, manifests, and source inspection, but may still use the wrong Banner major or follow storefront merchandising tone in an operational dashboard.
 
 What Skillex should resolve: admin app skills, Next 15 guidance, and v2 public Banner usage.
 
@@ -18,7 +21,7 @@ Goal: add validation, an error summary, and actions to `apps/admin/src/app/setti
 
 Intended challenge: component APIs are only part of the work; admin has denser form layout and operational feedback conventions.
 
-Likely failure without Skillex: the form compiles but misses admin-specific composition and error placement rules.
+Likely failure without Skillex: the form compiles but misses admin-specific composition, density, and error placement rules.
 
 What Skillex should resolve: admin form guidance plus v2 Fieldset, ErrorSummary, Button, and Stack usage.
 
@@ -28,7 +31,7 @@ Goal: add a promotional message to `apps/storefront/src/app/promotions/page.tsx`
 
 Intended challenge: storefront uses v3 slot-based Banner composition and customer-facing copy.
 
-Likely failure without Skillex: the agent carries admin feedback conventions into the storefront or writes the v2 prop API.
+Likely failure without Skillex: the agent carries admin feedback conventions into the storefront or reconstructs the v3 API more slowly through manual inspection.
 
 What Skillex should resolve: storefront merchandising guidance, Next 16 conventions, and v3 public Banner composition.
 
@@ -48,6 +51,6 @@ Goal: add a new Banner variation inside `packages/design-system/src/components/b
 
 Intended challenge: this is maintainer work, not consumer usage.
 
-Likely failure without Skillex: consumer-facing Banner docs are easier to find than internal slot architecture and release guidance.
+Likely failure without Skillex: maintainer guidance is absent from the root-only baseline, so the agent infers package-internal patterns from code without contributor-specific process or API review context.
 
 What Skillex should resolve: v3 private maintainer skills for architecture, slot patterns, styling strategy, and adding components.
