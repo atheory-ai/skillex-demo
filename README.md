@@ -64,3 +64,19 @@ Then work through `DEMO.md` and compare the likely behavior between:
 
 - a root-only baseline using `AGENTS.md` plus `skills/`
 - a Skillex path using the distributed skills selected by `skillex.yaml`
+
+## Automated Evaluation
+
+This repo also includes an impartial evaluation harness in [AGENT_PROMPT.md](/Volumes/Lukes/Jeremy/Sites/skillex-demo/AGENT_PROMPT.md).
+
+Use it when you want an agent to:
+
+- run the root-only baseline and the Skillex-style workflow in parallel with sub-agents
+- enforce realistic file restrictions for each workflow
+- measure timing and effort differences
+- produce a structured report on correctness, ambiguity, and likely failure modes
+
+The intended comparison is:
+
+- baseline: `AGENTS.md` plus the root `skills/` corpus only
+- Skillex: `skillex/` plus distributed app/package/vendor skills selected by `skillex.yaml`
