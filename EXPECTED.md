@@ -2,7 +2,7 @@
 
 ## Without Skillex
 
-Users or agents are likely to read broad root docs and retrieve skills that are individually true but not applicable. Common mistakes include:
+Users or agents are likely to read broad root docs and retrieve skills that are individually true but not applicable. As the flat skill corpus grows, common mistakes include:
 
 - using the v3 slot Banner API in the admin app, which depends on v2
 - using the v2 prop Banner API in storefront, which depends on v3

@@ -69,6 +69,52 @@ sources:
     audience: consumer
     priority: dependency
 
+  - id: api-client-public
+    path: packages/api-client/skills/public
+    package:
+      name: "@demo/api-client"
+      version: "0.x"
+    appliesTo:
+      consumers:
+        - apps/admin/**
+        - apps/storefront/**
+    audience: consumer
+    priority: dependency
+
+  - id: api-client-private
+    path: packages/api-client/skills/private
+    package:
+      name: "@demo/api-client"
+      version: "0.x"
+    appliesTo:
+      paths:
+        - packages/api-client/**
+    audience: maintainer
+    priority: owner
+
+  - id: commerce-workflows-public
+    path: packages/commerce-workflows/skills/public
+    package:
+      name: "@demo/commerce-workflows"
+      version: "0.x"
+    appliesTo:
+      consumers:
+        - apps/admin/**
+        - apps/storefront/**
+    audience: consumer
+    priority: dependency
+
+  - id: commerce-workflows-private
+    path: packages/commerce-workflows/skills/private
+    package:
+      name: "@demo/commerce-workflows"
+      version: "0.x"
+    appliesTo:
+      paths:
+        - packages/commerce-workflows/**
+    audience: maintainer
+    priority: owner
+
 resolution:
   order:
     - currentPath

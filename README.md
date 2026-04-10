@@ -10,7 +10,7 @@ Most current skill systems assume the agent can filter relevance from a pile of 
 - `apps/storefront`: a Next.js 16 storefront app that consumes `@demo/design-system` v3 from `packages/design-system`.
 - `packages/design-system`: current v3 design system with slot-based `Banner` composition.
 - `vendor/design-system-v2`: legacy v2 design system with prop-driven `Banner` usage.
-- `skills`: broad root skills that are true and useful, but not sufficiently scoped.
+- `skills`: a broad root corpus of overlapping skills that are true and useful, but not sufficiently scoped.
 - Distributed app and package skills that encode path, package, version, and audience context.
 
 ## The Problem
@@ -24,7 +24,7 @@ A flat skill directory can retrieve both sets of guidance and leave the user or 
 
 ## Part 1: Work Without Skillex
 
-Start with the root `AGENTS.md` and `skills/` directory. They contain reasonable repo-wide advice, but they do not say which Banner API applies in `apps/admin`, which Next.js convention applies in `apps/storefront`, or when design-system private maintainer guidance should be used.
+Start with the root `AGENTS.md` and `skills/` directory. They contain a larger set of reasonable repo-wide advice, but they still do not say which Banner API applies in `apps/admin`, which Next.js convention applies in `apps/storefront`, or when design-system private maintainer guidance should be used.
 
 Try the tasks in `DEMO.md` using only root-level guidance. The expected failure is subtle: changes may look plausible while using the wrong versioned API or the wrong app convention.
 
