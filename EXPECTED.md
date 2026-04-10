@@ -14,7 +14,7 @@ The output may still look credible because the root-only guidance, manifests, an
 
 ## With Skillex
 
-Skillex should narrow context before the agent acts by ignoring the root-only baseline corpus and selecting the distributed skills that match the current task:
+Skillex should narrow context before the agent acts by ignoring the root-only baseline corpus and selecting the shared and distributed skills that match the current task:
 
 - resolve by current file path
 - inspect dependency boundaries

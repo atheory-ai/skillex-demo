@@ -23,4 +23,4 @@ Run typechecks for touched packages and apps. Add focused tests when behavior be
 
 ## Architecture
 
-Root guidance is intentionally broad. It is useful for orientation but does not resolve package version, app-local convention, or consumer versus contributor context. Treat the root `skills/` directory as a baseline system, not as a substitute for package- or app-local guidance.
+Root guidance is intentionally broad. It is useful for orientation but does not resolve package version, app-local convention, or consumer versus contributor context. Treat the root `skills/` directory as a baseline system, not as a substitute for package- or app-local guidance. Shared Skillex skills may also exist under `skillex/`, but those belong to the scoped system rather than the root-only baseline.

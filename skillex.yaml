@@ -10,6 +10,26 @@ baseline:
   useWhenSkillexIsDisabled: true
 
 sources:
+  - id: shared-public
+    path: skillex/public
+    appliesTo:
+      paths:
+        - apps/**
+        - packages/**
+        - vendor/**
+    audience: consumer
+    priority: shared
+
+  - id: shared-private
+    path: skillex/private
+    appliesTo:
+      paths:
+        - apps/**
+        - packages/**
+        - vendor/**
+    audience: maintainer
+    priority: shared
+
   - id: admin-app
     path: apps/admin/skills
     appliesTo:

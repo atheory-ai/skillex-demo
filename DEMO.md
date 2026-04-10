@@ -3,7 +3,7 @@
 Use these exercises to compare:
 
 - a root-only baseline that uses only `AGENTS.md` plus `skills/`
-- a Skillex-style workflow that ignores the root `skills/` corpus and resolves distributed app/package/vendor skills instead
+- a Skillex-style workflow that ignores the root `skills/` corpus and resolves `skillex/` plus distributed app/package/vendor skills instead
 
 ## Task 1: Add A Promotional Banner To Admin
 
