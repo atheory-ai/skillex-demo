@@ -1,57 +1,26 @@
-# AGENTS
+# Agent Guidance
 
-This repository is designed to compare baseline file-based skill discovery with `skillex`.
+This repo uses pnpm workspaces with apps in `apps/`, shared packages in `packages/`, and legacy package examples in `vendor/`.
 
-## Before Skillex
+## Repo Conventions
 
-Start with the default `AGENTS.md` style workflow described by Agent Skills:
+- Prefer TypeScript and React Server Components unless a page explicitly needs client interactivity.
+- Keep UI changes small and realistic.
+- Use package exports instead of deep imports.
+- Keep app-specific behavior in the app and shared primitives in packages.
 
-- Read this file first.
-- Inspect the repo structure.
-- Discover relevant skill files by following paths and package boundaries.
-- Load only the files that seem relevant to the task at hand.
+## Next.js
 
-## Repository shape
+Both apps use the App Router. Put routes under `src/app`, keep page files focused, and avoid global state unless the task calls for it. Check the app package version before assuming framework behavior.
 
-- `apps/next-legacy` is an older Next.js app using `pages/`.
-- `apps/next-modern` is a newer Next.js app using `app/`.
-- Both apps depend on `@demo/component-library`.
-- The installed major version differs by app.
+## Design System
 
-## Skill locations
+Use `@demo/design-system` for shared UI primitives such as Banner, Button, Stack, Fieldset, PageHeader, and ErrorSummary. The design system has multiple major versions in this repo, so check the consuming app dependency before copying examples.
 
-- Repo-wide skills live in `skills/`.
-- Package skills live under package-local `skillex/public/` and `skillex/private/` directories.
-- Public package skills are for consumers of a package.
-- Private package skills are for maintainers working on that package itself.
+## Testing
 
-## Baseline discovery flow
+Run typechecks for touched packages and apps. Add focused tests when behavior becomes nontrivial.
 
-When working on an app:
+## Architecture
 
-1. Read the relevant repo-level skill in `skills/`.
-2. Determine which app you are in.
-3. Determine which package version that app has installed.
-4. Find the matching package skill files under that installed package.
-5. Avoid using private package skills unless working inside the package itself.
-
-## Places to inspect
-
-- `skills/repo.md`
-- `skills/demo-prompts.md`
-- `skills/next-pages-router.md`
-- `skills/next-app-router.md`
-- `apps/next-legacy/package.json`
-- `apps/next-modern/package.json`
-- `apps/next-legacy/node_modules/@demo/component-library/skillex/public/`
-- `apps/next-modern/node_modules/@demo/component-library/skillex/public/`
-
-## Transition to Skillex
-
-Later in the walkthrough, run:
-
-```bash
-npm run skillex:refresh
-```
-
-That will rebuild the local registry and replace this baseline experience with the generated `skillex`-aware `AGENTS.md` section.
+Root guidance is intentionally broad. It is useful for orientation but does not resolve package version, app-local convention, or consumer versus contributor context. Treat the root `skills/` directory as a baseline system, not as a substitute for package- or app-local guidance. Shared Skillex skills may also exist under `skillex/`, but those belong to the scoped system rather than the root-only baseline.

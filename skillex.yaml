@@ -1,17 +1,147 @@
-Version: 4
+version: 1
+project:
+  name: demo-skillex-monorepo
+  packageManager: pnpm
+  thesis: "Resolve applicable skills by path, dependency, version, and audience."
 
-Rules:
-  - Scope: "**"
-    Skills:
-      - skills/repo.md
-      - skills/demo-prompts.md
+baseline:
+  rootSkillsPath: skills
+  format: agentskills-directory
+  useWhenSkillexIsDisabled: true
 
-  - Scope: "apps/next-legacy/**"
-    Skills:
-      - skills/next-pages-router.md
-    DependencyBoundary: apps/next-legacy
+sources:
+  - id: shared-public
+    path: skillex/public
+    appliesTo:
+      paths:
+        - apps/**
+        - packages/**
+        - vendor/**
+    audience: consumer
+    priority: shared
 
-  - Scope: "apps/next-modern/**"
-    Skills:
-      - skills/next-app-router.md
-    DependencyBoundary: apps/next-modern
+  - id: shared-private
+    path: skillex/private
+    appliesTo:
+      paths:
+        - apps/**
+        - packages/**
+        - vendor/**
+    audience: maintainer
+    priority: shared
+
+  - id: admin-app
+    path: apps/admin/skills
+    appliesTo:
+      paths:
+        - apps/admin/**
+      framework:
+        name: next
+        version: "15"
+      dependencies:
+        "@demo/design-system": "2.x"
+    audience: app-consumer
+    priority: scoped
+
+  - id: storefront-app
+    path: apps/storefront/skills
+    appliesTo:
+      paths:
+        - apps/storefront/**
+      framework:
+        name: next
+        version: "16"
+      dependencies:
+        "@demo/design-system": "3.x"
+    audience: app-consumer
+    priority: scoped
+
+  - id: design-system-v3-public
+    path: packages/design-system/skills/public
+    package:
+      name: "@demo/design-system"
+      version: "3.x"
+    appliesTo:
+      consumers:
+        - apps/storefront/**
+    audience: consumer
+    priority: dependency
+
+  - id: design-system-v3-private
+    path: packages/design-system/skills/private
+    package:
+      name: "@demo/design-system"
+      version: "3.x"
+    appliesTo:
+      paths:
+        - packages/design-system/**
+    audience: maintainer
+    priority: owner
+
+  - id: design-system-v2-public
+    path: vendor/design-system-v2/skills/public
+    package:
+      name: "@demo/design-system"
+      version: "2.x"
+    appliesTo:
+      consumers:
+        - apps/admin/**
+    audience: consumer
+    priority: dependency
+
+  - id: api-client-public
+    path: packages/api-client/skills/public
+    package:
+      name: "@demo/api-client"
+      version: "0.x"
+    appliesTo:
+      consumers:
+        - apps/admin/**
+        - apps/storefront/**
+    audience: consumer
+    priority: dependency
+
+  - id: api-client-private
+    path: packages/api-client/skills/private
+    package:
+      name: "@demo/api-client"
+      version: "0.x"
+    appliesTo:
+      paths:
+        - packages/api-client/**
+    audience: maintainer
+    priority: owner
+
+  - id: commerce-workflows-public
+    path: packages/commerce-workflows/skills/public
+    package:
+      name: "@demo/commerce-workflows"
+      version: "0.x"
+    appliesTo:
+      consumers:
+        - apps/admin/**
+        - apps/storefront/**
+    audience: consumer
+    priority: dependency
+
+  - id: commerce-workflows-private
+    path: packages/commerce-workflows/skills/private
+    package:
+      name: "@demo/commerce-workflows"
+      version: "0.x"
+    appliesTo:
+      paths:
+        - packages/commerce-workflows/**
+    audience: maintainer
+    priority: owner
+
+resolution:
+  order:
+    - currentPath
+    - packageDependency
+    - packageVersion
+    - audience
+    - topic
+  fallback:
+    includeRootSkills: false
+    markRootSkillsAsBaseline: false

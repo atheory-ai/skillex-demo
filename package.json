@@ -1,13 +1,15 @@
 {
-  "name": "skillex-demo",
+  "name": "demo-skillex-monorepo",
   "private": true,
-  "version": "1.0.0",
+  "packageManager": "pnpm@10.0.0",
   "scripts": {
-    "skillex:refresh": "skillex refresh",
-    "skillex:query:legacy": "skillex query --path 'apps/next-legacy/**' --format summary",
-    "skillex:query:modern": "skillex query --path 'apps/next-modern/**' --format summary"
+    "dev:admin": "pnpm --filter @demo/admin dev",
+    "dev:storefront": "pnpm --filter @demo/storefront dev",
+    "build": "pnpm -r --filter './packages/**' --filter './apps/**' build",
+    "typecheck": "pnpm -r --filter './packages/**' --filter './apps/**' typecheck",
+    "lint": "pnpm -r --filter './packages/**' --filter './apps/**' lint"
   },
   "devDependencies": {
-    "@atheory-ai/skillex": "latest"
+    "typescript": "^5.8.0"
   }
 }
