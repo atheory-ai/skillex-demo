@@ -1,5 +1,9 @@
 # Agent Prompt
 
+This prompt is for a single comparison run.
+
+If you want a repeated benchmark with aggregated timing and analysis, use [BAKEOFF_PROMPT.md](/Volumes/Lukes/Jeremy/Sites/skillex-demo/BAKEOFF_PROMPT.md) instead.
+
 Use the following prompt to run an impartial, parallel evaluation of the repo's root-only baseline versus the Skillex-style distributed-skill workflow.
 
 ```md

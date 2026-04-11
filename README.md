@@ -80,3 +80,19 @@ The intended comparison is:
 
 - baseline: `AGENTS.md` plus the root `skills/` corpus only
 - Skillex: `skillex/` plus distributed app/package/vendor skills selected by `skillex.yaml`
+
+## Optional Bake-Off Benchmark
+
+If you want a repeated-run benchmark instead of a one-off comparison, use [BAKEOFF_PROMPT.md](/Volumes/Lukes/Jeremy/Sites/skillex-demo/BAKEOFF_PROMPT.md).
+
+That prompt is intentionally separate so users do not have to spend tokens on a bake-off every time they try the demo. It runs repeated paired evaluations, aggregates timing and effort metrics, and produces a structured benchmark report.
+
+The current benchmark report is checked in at [BAKEOFF_REPORT.md](/Volumes/Lukes/Jeremy/Sites/skillex-demo/BAKEOFF_REPORT.md).
+
+Current pilot result from `3` paired runs:
+
+- root-only baseline was faster on median wall-clock time
+- Skillex reduced ambiguity and manual context reconstruction
+- the strongest repeated wins were version selection, audience selection, and migration guidance
+
+That is the current honest reading of the repo: Skillex is proving a context-quality advantage more strongly than a raw speed advantage.
