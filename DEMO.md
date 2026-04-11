@@ -7,7 +7,7 @@ Use these exercises to compare:
 
 If you want to run the comparison as an automated review-board style evaluation, use [AGENT_PROMPT.md](/Volumes/Lukes/Jeremy/Sites/skillex-demo/AGENT_PROMPT.md). It instructs an agent to spawn sub-agents, enforce the root-only versus Skillex restrictions, measure timing and effort, and return a structured report.
 
-If you want a repeated benchmark instead of a one-off evaluation, use [BAKEOFF_PROMPT.md](/Volumes/Lukes/Jeremy/Sites/skillex-demo/BAKEOFF_PROMPT.md). The current pilot benchmark write-up is in [BAKEOFF_REPORT.md](/Volumes/Lukes/Jeremy/Sites/skillex-demo/BAKEOFF_REPORT.md).
+If you want a repeated benchmark instead of a one-off evaluation, use [BAKEOFF_PROMPT.md](/Volumes/Lukes/Jeremy/Sites/skillex-demo/BAKEOFF_PROMPT.md). The preferred measurement model is in [CONTEXT_BENCHMARK.md](/Volumes/Lukes/Jeremy/Sites/skillex-demo/CONTEXT_BENCHMARK.md), and the current end-to-end pilot write-up is in [BAKEOFF_REPORT.md](/Volumes/Lukes/Jeremy/Sites/skillex-demo/BAKEOFF_REPORT.md).
 
 ## Task 1: Add A Promotional Banner To Admin
 

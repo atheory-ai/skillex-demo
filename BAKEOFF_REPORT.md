@@ -2,19 +2,21 @@
 
 This file captures the current benchmark-style evaluation for the repo.
 
-Status: pilot benchmark  
+Status: pilot end-to-end benchmark  
 Run count: `3` paired runs across the full five-task suite  
 Date: `2026-04-10`
 
-This is enough to replace a one-off anecdote with a repeated comparison. It is not enough to make a strong public performance claim. For that, this repo should use the repeated-run harness in [BAKEOFF_PROMPT.md](/Volumes/Lukes/Jeremy/Sites/skillex-demo/BAKEOFF_PROMPT.md) with at least `5` paired runs, and ideally `10`.
+This report is an end-to-end agent benchmark. It is **not** a measurement of Skillex indexing time, Skillex resolve latency, or pure context-acquisition time.
+
+This is enough to replace a one-off anecdote with a repeated comparison. It is not enough to make a strong public performance claim. For that, this repo should use the repeated-run harness in [BAKEOFF_PROMPT.md](/Volumes/Lukes/Jeremy/Sites/skillex-demo/BAKEOFF_PROMPT.md) in its default context-only mode, with at least `5` paired runs, and ideally `10`.
 
 ## Executive Summary
 
 The repo now supports a credible bake-off.
 
-The strongest repeated difference is not raw speed. It is context quality. The root-only baseline stayed workable in all three runs, but it repeatedly had to reconstruct package-major and audience context from manifests and source. The Skillex path was consistently narrower and more confident, especially for versioned `@demo/design-system` work and maintainer tasks.
+The strongest repeated difference in this pilot is not raw speed. It is context quality. The root-only baseline stayed workable in all three runs, but it repeatedly had to reconstruct package-major and audience context from manifests and source. The Skillex path was consistently narrower and more confident, especially for versioned `@demo/design-system` work and maintainer tasks.
 
-The biggest caveat is that raw elapsed time did not favor Skillex in this pilot. The scoped workflow usually read more guidance files and took longer wall-clock time, while still producing lower ambiguity and higher confidence.
+The biggest caveat is that raw elapsed time did not favor Skillex in this pilot. The scoped workflow usually read more guidance files and took longer wall-clock time, while still producing lower ambiguity and higher confidence. That does **not** mean Skillex retrieval itself is slower, because this report includes the full sub-agent reasoning pass after context selection.
 
 ## Methodology
 
@@ -65,6 +67,12 @@ Skillex workflow was forbidden from using:
 
 Timing and counts were captured by the sub-agents as best-effort wall-clock measurements. File counts and manual-resolution counts are self-reported, not instrumented by external tracing.
 
+Important limitation:
+
+- the timings in this report include end-to-end sub-agent evaluation work
+- they do not isolate indexing, resolution, or time-to-context-ready
+- they should not be read as product-level Skillex performance numbers
+
 ## Run Summary
 
 | Run | Root-only elapsed | Skillex elapsed | Root-only guidance files | Skillex guidance files | Root-only manual resolutions | Skillex manual resolutions |
@@ -87,7 +95,7 @@ Whole-run medians:
 Interpretation:
 
 - Skillex reduced manual context reconstruction.
-- Skillex did not reduce wall-clock time in this pilot.
+- Skillex did not reduce end-to-end wall-clock time in this pilot.
 - The scoped workflow paid for narrower context with more up-front reading.
 
 ## Aggregate Metrics By Task
@@ -107,6 +115,7 @@ Interpretation:
 - On raw time alone, the root-only path was faster in this pilot.
 - On ambiguity and confidence, the Skillex path was better in every repeated run.
 - That means the demo currently proves a context-quality advantage more strongly than a speed advantage.
+- A context-only benchmark would be the correct next measurement if the goal is to compare retrieval rather than downstream reasoning.
 
 ## Task-By-Task Findings
 
@@ -210,7 +219,7 @@ Takeaway:
 | Scoped resolution reduces ambiguity | Strongly supported | Consistent across all tasks, strongest on tasks 1, 3, 4, and 5. |
 | Version-aware resolution matters | Strongly supported | The same-name v2/v3 package split kept showing up as a real issue. |
 | Audience-aware resolution matters | Strongly supported | Maintainer versus consumer guidance was one of the clearest differences. |
-| Scoped resolution improves raw elapsed time | Not supported by this pilot | Median wall-clock time favored the root-only baseline in the current three-run sample. |
+| Scoped resolution improves raw elapsed time | Not supported by this pilot | Median end-to-end wall-clock time favored the root-only baseline in the current three-run sample. This is not a resolver-latency measurement. |
 
 ## Final Verdict
 
@@ -227,6 +236,6 @@ What the repo only partially proves:
 
 What would materially strengthen the case:
 
-- rerun this benchmark with `5` or `10` paired runs
-- capture instrumented file-open counts instead of self-reported counts
+- rerun this benchmark in context-only mode with `5` or `10` paired runs
+- capture instrumented lookup and file-open counts instead of self-reported counts
 - add one or two more migration tasks with explicit target files

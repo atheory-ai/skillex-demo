@@ -4,6 +4,15 @@ Use this prompt when you want a separate, optionally run benchmark instead of th
 
 This is intentionally heavier. It uses repeated paired runs so the final report can say more than a single anecdotal comparison.
 
+By default, this prompt is for a **context-acquisition benchmark**, not an end-to-end coding benchmark. It is meant to answer:
+
+- how long it takes each workflow to get to usable context
+- what context it selected
+- how much context it pulled in
+- how many lookups and dead ends it needed before it was ready
+
+If you want the agent to continue into full task judgment or code-generation analysis, state that explicitly as a second phase.
+
 Recommended defaults:
 
 - quick pilot: `3` paired runs
@@ -21,6 +30,14 @@ Your job is to run a repeated bake-off between two agent workflows:
 You must use sub-agents in parallel and keep the two workflows isolated.
 
 Do not make code changes unless the user explicitly asks for them. This is an evaluation and reporting task.
+
+## Benchmark Mode
+
+Default mode: `context-only`
+
+In `context-only` mode, each sub-agent must stop as soon as it has enough context to implement the task correctly. It must not continue into drafting code, proposing a patch, or doing a full final implementation review.
+
+Only switch to `end-to-end` mode if the user explicitly asks for a broader evaluation.
 
 ## Run Count
 
@@ -103,15 +120,23 @@ It must **not** read:
 For every sub-agent run, capture:
 
 1. start time
-2. end time
-3. total elapsed time
+2. context-ready time
+3. elapsed time to context-ready
+4. end time if and only if you also run an explicit end-to-end phase
 4. per task:
    - time to first plausible implementation approach
-   - time to final task judgment
+   - time to context-ready
+   - time to final task judgment only in `end-to-end` mode
 5. counts:
+   - total lookups performed
+   - total file opens
    - markdown guidance files read
    - manifest/source files inspected
    - manual version or audience resolutions from code instead of guidance
+   - rejected or dead-end lookups
+   - final selected context files
+   - total context size in bytes or word count
+   - optional estimated token count for final selected context
 
 If the environment makes exact timing noisy, keep the raw timings anyway and state that they are best-effort wall-clock timings.
 
@@ -120,13 +145,15 @@ If the environment makes exact timing noisy, keep the raw timings anyway and sta
 For each task, each sub-agent must report:
 
 1. available guidance and signals
-2. likely implementation approach
-3. likely mistakes
-4. whether wrong-version API choice is:
+2. selected context files
+3. likely implementation approach
+4. likely mistakes
+5. whether wrong-version API choice is:
    - likely
    - plausible
    - unlikely
-5. retrieval noise or ambiguity level
+6. retrieval noise or ambiguity level
+7. number of lookups and dead ends before context-ready
 
 The Skillex sub-agent must additionally report:
 
@@ -144,17 +171,22 @@ After all paired runs complete:
 1. keep the raw results
 2. aggregate by task and workflow
 3. compute at least:
-   - median total elapsed time
+   - median elapsed time to context-ready
    - median time to first plausible approach
-   - median time to final judgment
+   - median time to final judgment only if you ran `end-to-end` mode
+   - median lookup count
+   - median file-open count
    - median guidance files read
    - median manifest/source files inspected
    - median manual context resolutions
+   - median dead-end lookups
+   - median selected context size
 4. summarize repeated qualitative findings:
    - where the baseline remains workable
    - where it becomes brittle
    - where scoped resolution materially helps
 5. do not overstate raw speed wins if the measured timings do not show them
+6. keep resolver-like retrieval metrics separate from downstream coding time
 
 ## Required Final Report Format
 
@@ -179,18 +211,24 @@ Return one structured report with these sections:
 Include a table with one row per task and columns like:
 
 - Task
-- Root-only median time / effort
-- Skillex median time / effort
-- Root-only median files read
-- Skillex median files read
+- Root-only median time to context-ready
+- Skillex median time to context-ready
+- Root-only median lookups / files opened
+- Skillex median lookups / files opened
+- Root-only median selected context size
+- Skillex median selected context size
 - Notes
 
 Also include whole-run medians for:
 
-- total elapsed time
+- elapsed time to context-ready
+- lookup count
+- file-open count
 - guidance files read
 - manifest/source files inspected
 - manual context resolutions
+- dead-end lookups
+- selected context size
 
 ### 4. Per-Run Notes
 
@@ -215,7 +253,9 @@ Cover:
 - migration difficulty
 - maintainer versus consumer guidance
 - effect of root-skill retrieval noise
+- context size and lookup count tradeoffs
 - raw timing versus confidence tradeoffs
+- any gap between context-ready time and full end-to-end time
 
 ### 7. Claims Check
 
@@ -225,7 +265,8 @@ State whether the evidence supports these claims:
 - scoped resolution reduces ambiguity
 - version-aware resolution matters
 - audience-aware resolution matters
-- raw elapsed time is better with scoped resolution
+- time to usable context is better with scoped resolution
+- raw elapsed time is better with scoped resolution only if you ran `end-to-end` mode
 
 Mark each claim as:
 
@@ -243,6 +284,7 @@ Provide:
 
 Be explicit about the difference between:
 
+- context-acquisition measurements
 - observed evidence
 - reasonable inference
 - repo claims not yet proven by the measured runs
