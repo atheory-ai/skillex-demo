@@ -89,12 +89,14 @@ That prompt is intentionally separate so users do not have to spend tokens on a 
 
 The preferred measurement model is described in [CONTEXT_BENCHMARK.md](/Volumes/Lukes/Jeremy/Sites/skillex-demo/CONTEXT_BENCHMARK.md).
 
+The current context-only pilot report is checked in at [CONTEXT_REPORT.md](/Volumes/Lukes/Jeremy/Sites/skillex-demo/CONTEXT_REPORT.md).
+
 The current checked-in report, [BAKEOFF_REPORT.md](/Volumes/Lukes/Jeremy/Sites/skillex-demo/BAKEOFF_REPORT.md), is an end-to-end pilot. It should not be read as a benchmark of Skillex indexing or resolver latency.
 
-Current pilot result from `3` paired runs:
+Current context-only pilot result from `3` paired runs:
 
-- root-only baseline was faster on median end-to-end wall-clock time
-- Skillex reduced ambiguity and manual context reconstruction
+- root-only baseline was faster on median time to context-ready
+- Skillex used fewer lookup actions and less manual version/audience reconstruction
 - the strongest repeated wins were version selection, audience selection, and migration guidance
 
-That is the current honest reading of the repo: Skillex is proving a context-quality advantage more strongly than a raw speed advantage. The next benchmark should measure time-to-context-ready, lookup count, selected context, and context size.
+That is the current honest reading of the repo: Skillex is proving a context-quality advantage more strongly than a manual wall-clock speed advantage in this pilot. The next step beyond this repo-level benchmark is to instrument actual resolver latency separately.

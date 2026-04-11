@@ -67,6 +67,7 @@ Those are different measurements and should be benchmarked separately.
 - Use [BAKEOFF_PROMPT.md](/Volumes/Lukes/Jeremy/Sites/skillex-demo/BAKEOFF_PROMPT.md) in its default context-only mode.
 - Use at least `5` paired runs for internal reporting.
 - Use `10` paired runs for a stronger public bake-off.
+- The current pilot report is checked in at [CONTEXT_REPORT.md](/Volumes/Lukes/Jeremy/Sites/skillex-demo/CONTEXT_REPORT.md).
 
 ## Optional Second Phase
 
