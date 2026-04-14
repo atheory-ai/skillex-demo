@@ -55,7 +55,7 @@ The two workflows must be intentionally asymmetric in a way that mirrors real-wo
 
 ### Sub-agent A: Root-only baseline
 
-This agent should mirror a typical root-only setup such as agentskills.io/Cursor-style usage where the agent sees:
+This agent should mirror a typical root-only setup (e.g. a Cursor-style AGENTS.md + root skills directory) where the agent sees:
 
 - `AGENTS.md`
 - the root `skills/` directory only
@@ -64,7 +64,6 @@ This agent should mirror a typical root-only setup such as agentskills.io/Cursor
 
 It must **not** read:
 
-- `specs/**`
 - `README.md`
 - `DEMO.md`
 - `EXPECTED.md`
@@ -92,7 +91,6 @@ It may read:
 
 It must **not** read:
 
-- `specs/**`
 - `README.md`
 - `DEMO.md`
 - `EXPECTED.md`
