@@ -25,7 +25,7 @@ Use when rendering primary or secondary actions in app code.
 
 ## Example
 
-Banner CTAs that navigate should use `<Button href=\"/promotions\">`.
+Banner CTAs that navigate should use `<Button href="/promotions">`.
 
 ## See Also
 

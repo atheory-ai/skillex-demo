@@ -5,7 +5,7 @@ Use these exercises to compare:
 - a root-only baseline that uses only `AGENTS.md` plus `skills/`
 - a Skillex-style workflow that ignores the root `skills/` corpus and resolves `skillex/` plus distributed app/package/vendor skills instead
 
-If you want to run the comparison as an automated review-board style bakeoff, use [AGENT_PROMPT.md](/Volumes/Lukes/Jeremy/Sites/skillex-demo/AGENT_PROMPT.md). It instructs an agent to spawn sub-agents, enforce the root-only versus Skillex restrictions, measure timing and effort, and return a structured report.
+If you want to run the comparison as an automated review-board style bakeoff, use [AGENT_PROMPT.md](./AGENT_PROMPT.md). It instructs an agent to spawn sub-agents, enforce the root-only versus Skillex restrictions, measure timing and effort, and return a structured report.
 
 ## Task 1: Add A Promotional Banner To Admin
 

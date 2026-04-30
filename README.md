@@ -67,7 +67,7 @@ Then work through `DEMO.md` and compare the likely behavior between:
 
 ## Automated Evaluation
 
-This repo also includes an impartial evaluation harness in [AGENT_PROMPT.md](/Volumes/Lukes/Jeremy/Sites/skillex-demo/AGENT_PROMPT.md).
+This repo also includes an impartial evaluation harness in [AGENT_PROMPT.md](./AGENT_PROMPT.md).
 
 Use it when you want an agent to:
 

@@ -25,7 +25,7 @@ Use when page sections need consistent vertical rhythm.
 
 ## Example
 
-Use `gap=\"lg\"` for page sections and `gap=\"md\"` inside forms.
+Use `gap="lg"` for page sections and `gap="md"` inside forms.
 
 ## See Also
 
