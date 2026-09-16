@@ -1,25 +1,24 @@
-# Expected Outcomes
+# Evaluator Reference
 
-## Without Skillex
+Do not provide this file to trial sub-agents. The coordinating agent may read it
+only after both independent results are complete.
 
-Users or agents are likely to read only broad root docs and retrieve skills that are individually true but not applicable. As the flat root skill corpus grows, common mistakes include:
+## Repository facts
 
-- using the v3 slot Banner API in the admin app, which depends on v2
-- using the v2 prop Banner API in storefront, which depends on v3
-- applying storefront merchandising style to operational admin feedback
-- treating consumer package guidance as maintainer implementation guidance
-- mixing framework conventions between Next.js 15 and Next.js 16 apps
+- Admin uses Next.js 15 and `@demo/design-system` v2 from
+  `vendor/design-system-v2`.
+- Storefront uses Next.js 16 and `@demo/design-system` v3 from
+  `packages/design-system`.
+- v2 Banner is prop-driven.
+- v3 Banner is slot-driven.
+- Work inside `packages/design-system` is maintainer work, not consumer usage.
 
-The output may still look credible because the root-only guidance, manifests, and source code often allow a careful agent to reconstruct the answer manually. The failure mode is brittleness: repeated manual context resolution under noisy root guidance.
+## Evaluation principles
 
-## With Skillex
-
-Skillex should narrow context before the agent acts by ignoring the root-only baseline corpus and selecting the shared and distributed skills that match the current task:
-
-- resolve by current file path
-- inspect dependency boundaries
-- select the installed package major
-- distinguish public consumer skills from private maintainer skills
-- narrow further by topic and tag
-
-The expected result is less ambiguity, fewer mixed-version changes, and a clearer distinction between available knowledge and applicable knowledge.
+- Correctness matters more than speed.
+- Manual manifest and source inspection is valid baseline behavior.
+- Reading both package majors increases retrieval noise but is not itself an error.
+- A Skillex advantage must be observed through actual `query` and `read`
+  behavior, not simulated file restrictions.
+- One run is a demonstration, not a statistically meaningful performance
+  benchmark.
