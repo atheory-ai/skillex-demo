@@ -62,6 +62,7 @@ The baseline branch should pass:
 
 ```sh
 pnpm install --frozen-lockfile
+pnpm baseline:verify
 pnpm typecheck
 ```
 

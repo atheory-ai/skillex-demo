@@ -7,7 +7,8 @@
     "dev:storefront": "pnpm --filter @demo/storefront dev",
     "build": "pnpm -r --filter './packages/**' --filter './apps/**' build",
     "typecheck": "pnpm -r --filter './packages/**' --filter './apps/**' typecheck",
-    "lint": "pnpm -r --filter './packages/**' --filter './apps/**' lint"
+    "lint": "pnpm -r --filter './packages/**' --filter './apps/**' lint",
+    "baseline:verify": "node scripts/verify-baseline.mjs"
   },
   "devDependencies": {
     "typescript": "^5.8.0"

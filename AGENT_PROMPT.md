@@ -16,6 +16,7 @@ The worktrees must be disposable and must not share uncommitted changes:
 - treatment: `origin/skillex-0.9`
 
 Install dependencies with the repository's declared pnpm version in each worktree.
+Run `pnpm baseline:verify` in the baseline worktree.
 In the treatment worktree, run:
 
 ```sh
