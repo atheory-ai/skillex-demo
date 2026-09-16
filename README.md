@@ -1,82 +1,75 @@
-# demo-skillex-monorepo
+# Skillex Agent Worktree Demo
 
-This repository is a compact demo of a common AI coding failure mode: the system has useful knowledge available, but it cannot reliably resolve which knowledge applies to the file being changed.
+This repository is an agent-run comparison of conventional root-level skills and
+Skillex 0.9 scoped retrieval. It is not a manual tutorial.
 
-Most current skill systems assume the agent can filter relevance from a pile of skills. This repo demonstrates why that assumption breaks at scale.
+Give your coding agent this instruction:
 
-## What It Contains
+> Set up and run the comparison described in README.md. Use sub-agents in isolated
+> worktrees, verify both results, and report the evidence.
 
-- `apps/admin`: a Next.js 15 internal admin app that consumes `@demo/design-system` v2 from `vendor/design-system-v2`.
-- `apps/storefront`: a Next.js 16 storefront app that consumes `@demo/design-system` v3 from `packages/design-system`.
-- `packages/design-system`: current v3 design system with slot-based `Banner` composition.
-- `vendor/design-system-v2`: legacy v2 design system with prop-driven `Banner` usage.
-- `skills`: a broad root-only corpus in a directory-per-skill `SKILL.md` format. It is intentionally useful, overlapping, and not sufficiently scoped.
-- `skillex/public` and `skillex/private`: shared repo-level scoped skills used by Skillex in addition to app/package/vendor skills.
-- Distributed app and package skills that encode path, package, version, and audience context.
+The agent should perform installation, worktree setup, task execution, validation,
+cleanup, and reporting. The human reviews the final report rather than copying a
+sequence of setup commands.
 
-## The Problem
+## Comparison branches
 
-Both design-system packages are named `@demo/design-system`, but their APIs differ:
+- `main` is the baseline. It exposes one root `AGENTS.md` and a broad root
+  `skills/` corpus.
+- `skillex-0.9` is the treatment. It contains the same application and package
+  source, but uses the released Skillex 0.9 configuration, distributed skills,
+  package exports, and bounded `query` / `read` retrieval.
 
-- v2 uses `<Banner title="..." description="..." action={...} />`
-- v3 uses `<Banner><Banner.Content>...</Banner.Content></Banner>`
+The branches intentionally differ only in agent-guidance and Skillex integration
+surfaces. Application source must remain equivalent.
 
-A flat skill directory can retrieve both sets of guidance and leave the user or agent to infer which one applies. That inference becomes harder when framework versions, app conventions, and consumer versus maintainer guidance are mixed in the same context.
+## Agent procedure
 
-## Part 1: Work Without Skillex
+The coordinating agent must read [AGENT_PROMPT.md](./AGENT_PROMPT.md) and execute
+it. In summary, the agent will:
 
-Start with the root `AGENTS.md` and `skills/` directory only. In that baseline mode, ignore the skills shipped deeper under `apps/`, `packages/`, `vendor/`, and `skillex/`. The root corpus contains a larger set of reasonable repo-wide advice, but it still does not say which Banner API applies in `apps/admin`, which Next.js convention applies in `apps/storefront`, or when design-system private maintainer guidance should be used.
+1. fetch both comparison branches;
+2. create detached sibling worktrees for `origin/main` and
+   `origin/skillex-0.9`;
+3. install dependencies in both worktrees;
+4. run `pnpm skillex:refresh` and `pnpm skillex:verify` in the treatment;
+5. launch isolated baseline and treatment sub-agents with the same task;
+6. validate each implementation and compare its diff, retrieval path, timing,
+   correctness, and ambiguity;
+7. return the structured report required by the prompt;
+8. remove the disposable worktrees after preserving the evidence.
 
-Try the tasks in `DEMO.md` using only root-level guidance. The expected failure is subtle: changes may look plausible while still requiring brittle manual context reconstruction from root docs, manifests, and source.
+If sub-agents are unavailable, the coordinator may run the two trials sequentially,
+but must disclose that limitation.
 
-## Part 2: Turn On Skillex
+## What the demo tests
 
-The `skillex.yaml` file describes a path-aware, dependency-aware, version-aware resolution model. In this mode, Skillex ignores the root-only baseline corpus and resolves:
+The monorepo contains two applications using different major versions of the same
+design-system package:
 
-- shared scoped skills in `skillex/public` and `skillex/private`
-- distributed app/package/vendor skills shipped alongside the code
+- `apps/admin` uses Next.js 15 and `@demo/design-system` v2.
+- `apps/storefront` uses Next.js 16 and `@demo/design-system` v3.
 
-That means:
+The tasks in [DEMO.md](./DEMO.md) exercise package-major selection, app-local
+conventions, migrations, and consumer-versus-maintainer guidance.
 
-- app paths resolve app-local skills
-- app dependencies resolve the correct package skills
-- shared repo-level Skillex skills remain available without falling back to the root-only baseline
-- design-system package paths expose private maintainer skills
-- vendor paths expose v2 public skills
+The coordinator may consult [EXPECTED.md](./EXPECTED.md) only after both sub-agents
+have submitted independent results. Trial sub-agents must not read that file.
 
-The same tasks should now retrieve narrower context before code is changed.
+## Maintainer checks
 
-## What This Proves
-
-This is not a documentation volume problem. More docs alone can make retrieval noisier. The useful distinction is applicability: current file path, installed package version, package boundary, and audience should determine which skills enter context. Skillex can support both shared root-level skills and code-local shipped skills; this demo keeps the baseline root corpus separate so the comparison stays visible.
-
-## Try It
-
-Install and run the apps:
+The baseline branch should pass:
 
 ```sh
-pnpm install
-pnpm dev:admin
-pnpm dev:storefront
+pnpm install --frozen-lockfile
+pnpm baseline:verify
+pnpm typecheck
 ```
 
-Then work through `DEMO.md` and compare the likely behavior between:
+The treatment branch adds:
 
-- a root-only baseline using `AGENTS.md` plus `skills/`
-- a Skillex path using the distributed skills selected by `skillex.yaml`
-
-## Automated Evaluation
-
-This repo also includes an impartial evaluation harness in [AGENT_PROMPT.md](./AGENT_PROMPT.md).
-
-Use it when you want an agent to:
-
-- run the root-only baseline and the Skillex-style workflow in parallel with sub-agents
-- enforce realistic file restrictions for each workflow
-- measure timing and effort differences
-- produce a structured report on correctness, ambiguity, and likely failure modes
-
-The intended comparison is:
-
-- baseline: `AGENTS.md` plus the root `skills/` corpus only
-- Skillex: `skillex/` plus distributed app/package/vendor skills selected by `skillex.yaml`
+```sh
+pnpm skillex:refresh
+pnpm skillex:verify
+pnpm skillex:check
+```
