@@ -24,3 +24,10 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm typecheck
+      - run: pnpm skillex:refresh
+      - run: pnpm skillex:verify
+      - run: pnpm skillex:check
+      - name: Verify application source parity
+        run: |
+          git fetch origin main --depth=1
+          git diff --exit-code origin/main -- +            apps/admin/src +            apps/storefront/src +            packages/api-client/src +            packages/commerce-workflows/src +            packages/design-system/src +            vendor/design-system-v2/src

@@ -1,147 +1,140 @@
-version: 1
-project:
-  name: demo-skillex-monorepo
-  packageManager: pnpm
-  thesis: "Resolve applicable skills by path, dependency, version, and audience."
+Version: 4
 
-baseline:
-  rootSkillsPath: skills
-  format: agentskills-directory
-  useWhenSkillexIsDisabled: true
+Rules:
+  - Scope: "apps/admin/**"
+    Skills:
+      - skillex/public/accessibility-foundations.md
+      - skillex/public/repo-navigation.md
+      - skillex/public/server-rendering.md
+      - skillex/public/shared-workflow-packages.md
+      - skillex/public/version-resolution.md
+      - apps/admin/skills/action-priority.md
+      - apps/admin/skills/campaign-operations.md
+      - apps/admin/skills/dashboard-feedback.md
+      - apps/admin/skills/forms-and-layout.md
+      - apps/admin/skills/internal-copy.md
+      - apps/admin/skills/navigation-and-breadcrumbs.md
+      - apps/admin/skills/next15-conventions.md
+      - apps/admin/skills/operational-status.md
+      - apps/admin/skills/settings-validation.md
+      - apps/admin/skills/task-density.md
+    DependencyBoundary: apps/admin
 
-sources:
-  - id: shared-public
-    path: skillex/public
-    appliesTo:
-      paths:
-        - apps/**
-        - packages/**
-        - vendor/**
-    audience: consumer
-    priority: shared
+  - Scope: "apps/storefront/**"
+    Skills:
+      - skillex/public/accessibility-foundations.md
+      - skillex/public/repo-navigation.md
+      - skillex/public/server-rendering.md
+      - skillex/public/shared-workflow-packages.md
+      - skillex/public/version-resolution.md
+      - apps/storefront/skills/conversion-layout.md
+      - apps/storefront/skills/cta-priority.md
+      - apps/storefront/skills/homepage-storytelling.md
+      - apps/storefront/skills/merchandising-patterns.md
+      - apps/storefront/skills/next16-conventions.md
+      - apps/storefront/skills/offer-disclaimers.md
+      - apps/storefront/skills/promotions-copy.md
+      - apps/storefront/skills/seasonal-campaigns.md
+      - apps/storefront/skills/trust-messaging.md
+    DependencyBoundary: apps/storefront
 
-  - id: shared-private
-    path: skillex/private
-    appliesTo:
-      paths:
-        - apps/**
-        - packages/**
-        - vendor/**
-    audience: maintainer
-    priority: shared
+  - Scope: "packages/design-system/**"
+    Skills:
+      - skillex/public/accessibility-foundations.md
+      - skillex/public/repo-navigation.md
+      - skillex/public/server-rendering.md
+      - skillex/public/shared-workflow-packages.md
+      - skillex/public/version-resolution.md
+      - skillex/private/architecture.md
+      - skillex/private/demo-evaluation.md
+      - skillex/private/migration-governance.md
+      - skillex/private/repo-maintenance.md
+      - packages/design-system/skills/public/accessibility.md
+      - packages/design-system/skills/public/banner-composition.md
+      - packages/design-system/skills/public/banner-tone-selection.md
+      - packages/design-system/skills/public/button-usage.md
+      - packages/design-system/skills/public/composition-order.md
+      - packages/design-system/skills/public/error-summary-usage.md
+      - packages/design-system/skills/public/fieldset-usage.md
+      - packages/design-system/skills/public/forms-composition.md
+      - packages/design-system/skills/public/layout-primitives.md
+      - packages/design-system/skills/public/links-and-actions.md
+      - packages/design-system/skills/public/migration-v2-to-v3.md
+      - packages/design-system/skills/public/page-header-usage.md
+      - packages/design-system/skills/public/server-rendering.md
+      - packages/design-system/skills/public/stack-usage.md
+      - packages/design-system/skills/public/tokens-and-spacing.md
+      - packages/design-system/skills/private/accessibility-checklist.md
+      - packages/design-system/skills/private/adding-components.md
+      - packages/design-system/skills/private/api-review.md
+      - packages/design-system/skills/private/architecture.md
+      - packages/design-system/skills/private/banner-internals.md
+      - packages/design-system/skills/private/change-management.md
+      - packages/design-system/skills/private/component-testing.md
+      - packages/design-system/skills/private/documentation-updates.md
+      - packages/design-system/skills/private/exports-and-entrypoints.md
+      - packages/design-system/skills/private/package-versioning.md
+      - packages/design-system/skills/private/release-process.md
+      - packages/design-system/skills/private/slot-patterns.md
+      - packages/design-system/skills/private/styling-strategy.md
+      - packages/design-system/skills/private/tone-token-maps.md
 
-  - id: admin-app
-    path: apps/admin/skills
-    appliesTo:
-      paths:
-        - apps/admin/**
-      framework:
-        name: next
-        version: "15"
-      dependencies:
-        "@demo/design-system": "2.x"
-    audience: app-consumer
-    priority: scoped
+  - Scope: "packages/api-client/**"
+    Skills:
+      - skillex/public/accessibility-foundations.md
+      - skillex/public/repo-navigation.md
+      - skillex/public/server-rendering.md
+      - skillex/public/shared-workflow-packages.md
+      - skillex/public/version-resolution.md
+      - skillex/private/architecture.md
+      - skillex/private/demo-evaluation.md
+      - skillex/private/migration-governance.md
+      - skillex/private/repo-maintenance.md
+      - packages/api-client/skills/public/caching.md
+      - packages/api-client/skills/public/data-shapes.md
+      - packages/api-client/skills/public/request-boundaries.md
+      - packages/api-client/skills/private/mock-data.md
+      - packages/api-client/skills/private/release-notes.md
+      - packages/api-client/skills/private/schema-changes.md
 
-  - id: storefront-app
-    path: apps/storefront/skills
-    appliesTo:
-      paths:
-        - apps/storefront/**
-      framework:
-        name: next
-        version: "16"
-      dependencies:
-        "@demo/design-system": "3.x"
-    audience: app-consumer
-    priority: scoped
+  - Scope: "packages/commerce-workflows/**"
+    Skills:
+      - skillex/public/accessibility-foundations.md
+      - skillex/public/repo-navigation.md
+      - skillex/public/server-rendering.md
+      - skillex/public/shared-workflow-packages.md
+      - skillex/public/version-resolution.md
+      - skillex/private/architecture.md
+      - skillex/private/demo-evaluation.md
+      - skillex/private/migration-governance.md
+      - skillex/private/repo-maintenance.md
+      - packages/commerce-workflows/skills/public/eligibility-rules.md
+      - packages/commerce-workflows/skills/public/promotion-messaging.md
+      - packages/commerce-workflows/skills/public/workflow-composition.md
+      - packages/commerce-workflows/skills/private/adding-workflows.md
+      - packages/commerce-workflows/skills/private/idempotency.md
+      - packages/commerce-workflows/skills/private/workflow-testing.md
 
-  - id: design-system-v3-public
-    path: packages/design-system/skills/public
-    package:
-      name: "@demo/design-system"
-      version: "3.x"
-    appliesTo:
-      consumers:
-        - apps/storefront/**
-    audience: consumer
-    priority: dependency
-
-  - id: design-system-v3-private
-    path: packages/design-system/skills/private
-    package:
-      name: "@demo/design-system"
-      version: "3.x"
-    appliesTo:
-      paths:
-        - packages/design-system/**
-    audience: maintainer
-    priority: owner
-
-  - id: design-system-v2-public
-    path: vendor/design-system-v2/skills/public
-    package:
-      name: "@demo/design-system"
-      version: "2.x"
-    appliesTo:
-      consumers:
-        - apps/admin/**
-    audience: consumer
-    priority: dependency
-
-  - id: api-client-public
-    path: packages/api-client/skills/public
-    package:
-      name: "@demo/api-client"
-      version: "0.x"
-    appliesTo:
-      consumers:
-        - apps/admin/**
-        - apps/storefront/**
-    audience: consumer
-    priority: dependency
-
-  - id: api-client-private
-    path: packages/api-client/skills/private
-    package:
-      name: "@demo/api-client"
-      version: "0.x"
-    appliesTo:
-      paths:
-        - packages/api-client/**
-    audience: maintainer
-    priority: owner
-
-  - id: commerce-workflows-public
-    path: packages/commerce-workflows/skills/public
-    package:
-      name: "@demo/commerce-workflows"
-      version: "0.x"
-    appliesTo:
-      consumers:
-        - apps/admin/**
-        - apps/storefront/**
-    audience: consumer
-    priority: dependency
-
-  - id: commerce-workflows-private
-    path: packages/commerce-workflows/skills/private
-    package:
-      name: "@demo/commerce-workflows"
-      version: "0.x"
-    appliesTo:
-      paths:
-        - packages/commerce-workflows/**
-    audience: maintainer
-    priority: owner
-
-resolution:
-  order:
-    - currentPath
-    - packageDependency
-    - packageVersion
-    - audience
-    - topic
-  fallback:
-    includeRootSkills: false
-    markRootSkillsAsBaseline: false
+  - Scope: "vendor/design-system-v2/**"
+    Skills:
+      - skillex/public/accessibility-foundations.md
+      - skillex/public/repo-navigation.md
+      - skillex/public/server-rendering.md
+      - skillex/public/shared-workflow-packages.md
+      - skillex/public/version-resolution.md
+      - skillex/private/architecture.md
+      - skillex/private/demo-evaluation.md
+      - skillex/private/migration-governance.md
+      - skillex/private/repo-maintenance.md
+      - vendor/design-system-v2/skills/public/accessibility.md
+      - vendor/design-system-v2/skills/public/banner-usage.md
+      - vendor/design-system-v2/skills/public/button-usage.md
+      - vendor/design-system-v2/skills/public/deprecations.md
+      - vendor/design-system-v2/skills/public/error-summary-usage.md
+      - vendor/design-system-v2/skills/public/fieldset-usage.md
+      - vendor/design-system-v2/skills/public/forms-composition.md
+      - vendor/design-system-v2/skills/public/layout-primitives.md
+      - vendor/design-system-v2/skills/public/migration-prep.md
+      - vendor/design-system-v2/skills/public/page-header-usage.md
+      - vendor/design-system-v2/skills/public/stack-usage.md
+      - vendor/design-system-v2/skills/public/tone-selection.md
