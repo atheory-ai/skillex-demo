@@ -3,6 +3,9 @@
   "version": "3.0.0",
   "private": true,
   "type": "module",
+  "skillex": {
+    "path": "skills"
+  },
   "exports": {
     ".": "./src/index.ts"
   },

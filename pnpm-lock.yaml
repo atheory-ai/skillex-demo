@@ -8,6 +8,9 @@ importers:
 
   .:
     devDependencies:
+      '@atheory-ai/skillex':
+        specifier: 0.9.0
+        version: 0.9.0
       typescript:
         specifier: ^5.8.0
         version: 5.9.3
@@ -106,6 +109,41 @@ importers:
         version: 5.9.3
 
 packages:
+
+  '@atheory-ai/skillex-darwin-arm64@0.9.0':
+    resolution: {integrity: sha512-/R61hr8msgRqsxb/CMk2B+CgZ8kH8qwjU91aHNVGAJKcbpbsvS/CdrEHz6fcUcbT6N+Af4KDed5Hh6xCDq2A2A==}
+    cpu: [arm64]
+    os: [darwin]
+    hasBin: true
+
+  '@atheory-ai/skillex-darwin-x64@0.9.0':
+    resolution: {integrity: sha512-vu2zTunZCgllo6VHAeFnX1L4BigtxStCThOjr3MN38la3uZCjegvWLkCPYVBxQa6BzbxgO7/80ZBOYSdhb9cGw==}
+    cpu: [x64]
+    os: [darwin]
+    hasBin: true
+
+  '@atheory-ai/skillex-linux-arm64@0.9.0':
+    resolution: {integrity: sha512-I83KDW1RHMr+3BInedJ+ktUjgUUKayobBUsUFELRGXYX8+xdqnVHJV/dZsLjxcIr3tp73VRgKz2f4infOtzZMw==}
+    cpu: [arm64]
+    os: [linux]
+    hasBin: true
+
+  '@atheory-ai/skillex-linux-x64@0.9.0':
+    resolution: {integrity: sha512-nJE2txCsAj61Vru4Rwi64rWdXBWMU95Fo7+R4xJUsEDv6w8ZdlWjf7EaWkRpoVvzKuWrLIjaYy4mDlXmrLi5pg==}
+    cpu: [x64]
+    os: [linux]
+    hasBin: true
+
+  '@atheory-ai/skillex-win32-x64@0.9.0':
+    resolution: {integrity: sha512-Gdeq27Akx7vtOqwIcaK+mP2tJwGbqAQ919fJEOk8RSHy6AVdAicmE75IyXSNg3qMflAeofG4TIA3+rz1RzD4gg==}
+    cpu: [x64]
+    os: [win32]
+    hasBin: true
+
+  '@atheory-ai/skillex@0.9.0':
+    resolution: {integrity: sha512-nhZ0hVkZruXqsPKIAXidNx7bqaclOi6e1MH8tDh/j0Oucvh2JBDD2fFCjMQEizBiqATFPlPN9H/9yQORFwNcaA==}
+    engines: {node: '>=18'}
+    hasBin: true
 
   '@demo/design-system@file:vendor/design-system-v2':
     resolution: {directory: vendor/design-system-v2, type: directory}
@@ -490,6 +528,29 @@ packages:
     resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
 
 snapshots:
+
+  '@atheory-ai/skillex-darwin-arm64@0.9.0':
+    optional: true
+
+  '@atheory-ai/skillex-darwin-x64@0.9.0':
+    optional: true
+
+  '@atheory-ai/skillex-linux-arm64@0.9.0':
+    optional: true
+
+  '@atheory-ai/skillex-linux-x64@0.9.0':
+    optional: true
+
+  '@atheory-ai/skillex-win32-x64@0.9.0':
+    optional: true
+
+  '@atheory-ai/skillex@0.9.0':
+    optionalDependencies:
+      '@atheory-ai/skillex-darwin-arm64': 0.9.0
+      '@atheory-ai/skillex-darwin-x64': 0.9.0
+      '@atheory-ai/skillex-linux-arm64': 0.9.0
+      '@atheory-ai/skillex-linux-x64': 0.9.0
+      '@atheory-ai/skillex-win32-x64': 0.9.0
 
   '@demo/design-system@file:vendor/design-system-v2(react@19.2.5)':
     dependencies:
