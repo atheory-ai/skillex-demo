@@ -1,5 +1,15 @@
 Version: 4
 
+Install:
+  Strategy: local-dev-dependency
+  PackageManager: pnpm
+
+Core:
+  Presets:
+    - minimal-comments
+    - verify-behavior
+    - recheck-assumptions
+
 Rules:
   - Scope: "apps/admin/**"
     Skills:

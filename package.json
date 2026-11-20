@@ -13,7 +13,7 @@
     "skillex:check": "skillex refresh --check && skillex test validate --check"
   },
   "devDependencies": {
-    "@atheory-ai/skillex": "0.9.0",
+    "@atheory-ai/skillex": "0.12.0",
     "typescript": "^5.8.0"
   },
   "engines": {

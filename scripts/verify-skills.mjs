@@ -1,3 +1,4 @@
+import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
 
 const executable = process.platform === "win32" ? "skillex.cmd" : "skillex";
@@ -77,6 +78,21 @@ function requireNoMatch(label, arguments_) {
   if (result.type !== "no_match") {
     throw new Error(`${label}: expected no_match, got ${JSON.stringify(result)}`);
   }
+}
+
+const setup = run(["query", "--json"]);
+const steering = run(["read", "--ref", setup.core.ref, "--json"]);
+assert.deepEqual(steering.core, setup.core);
+assert.ok(steering.content.trim());
+
+const presetNames = ["minimal-comments", "recheck-assumptions", "verify-behavior"];
+assert.deepEqual(setup.core_skills.map(({ name }) => name).sort(), presetNames);
+for (const { name, when, ref } of setup.core_skills) {
+  assert.ok(when.trim(), `Missing cue for ${name}`);
+  assert.equal(ref, `skillex:${name}`);
+  const skill = run(["read", "--ref", ref, "--json"]);
+  assert.equal(skill.ref, ref);
+  assert.ok(skill.content.trim(), `Missing guidance for ${name}`);
 }
 
 const adminApp = requireResult(
@@ -178,4 +194,4 @@ if (
   throw new Error(`Unexpected bounded read response: ${JSON.stringify(boundedRead)}`);
 }
 
-console.log("Verified focused query and bounded read journeys for Skillex 0.9.0.");
+console.log("Verified core preset discovery and reads, scoped queries, and bounded section reads.");

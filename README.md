@@ -1,7 +1,7 @@
 # Skillex Agent Worktree Demo
 
 This repository is an agent-run comparison of conventional root-level skills and
-Skillex 0.9 scoped retrieval. It is not a manual tutorial.
+Skillex 0.12.0 scoped retrieval with three experimental presets enabled. It is not a manual tutorial.
 
 Give your coding agent this instruction:
 
@@ -17,8 +17,14 @@ sequence of setup commands.
 - `main` is the baseline. It exposes one root `AGENTS.md` and a broad root
   `skills/` corpus.
 - `skillex-0.9` is the treatment. It contains the same application and package
-  source, but uses the released Skillex 0.9 configuration, distributed skills,
-  package exports, and bounded `query` / `read` retrieval.
+  source and pins Skillex 0.12.0 as a pnpm dev dependency. It uses distributed
+  skills, package exports, and bounded `query` / `read` retrieval.
+
+The treatment enables `minimal-comments`, `verify-behavior`, and
+`recheck-assumptions` in `skillex.yaml`. Session initialization advertises
+these experimental presets. The agent reads the associated skill through
+Skillex when its cue applies. Record which skills it actually read. The
+comparison measures the combined treatment and cannot isolate a preset's effect.
 
 The branches intentionally differ only in agent-guidance and Skillex integration
 surfaces. Application source must remain equivalent.

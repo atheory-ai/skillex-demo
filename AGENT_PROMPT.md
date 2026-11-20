@@ -62,10 +62,13 @@ Each sub-agent must:
 
 The treatment agent must use Skillex progressive retrieval:
 
-1. start with `skillex query` or the Skillex MCP query;
-2. narrow if discovery returns `too_broad`;
-3. use `skillex read` only for selected references;
-4. record query and read counts without dumping whole skill files.
+1. call `skillex_query` without filters (or run `pnpm exec skillex query --json`)
+   when setup context is missing. Read the returned core ref if its revision is
+   new to the session;
+2. use preset cues to decide when to read an advertised core skill through Skillex;
+3. query by path and task, narrow on `too_broad`, and read selected references;
+4. record query and read counts and the core skill refs actually read, including
+   when none were needed.
 
 Do not let either sub-agent see the other's work or conclusions before both finish.
 
@@ -98,7 +101,7 @@ Return:
 ### Environment
 
 - branch SHAs;
-- Skillex version;
+- Skillex version and enabled experimental presets;
 - package-manager version;
 - parallel or sequential execution.
 
@@ -109,7 +112,7 @@ For each trial include:
 - elapsed time;
 - guidance files read;
 - manifest/source files inspected;
-- Skillex query/read counts;
+- Skillex query/read counts and core skill refs actually read;
 - typecheck result;
 - wrong-version or audience mistakes;
 - uncertainty and retrieval noise.
